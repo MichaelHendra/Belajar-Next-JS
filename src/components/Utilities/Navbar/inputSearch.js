@@ -8,19 +8,16 @@ export default function InputSearch(){
     const searchRef = useRef()
     const router = useRouter()
     const handleSearch = (event) => {
-        event.preventDefault()
-        const keyword = searchRef.current.value
-        router.push(`/search/${keyword}`)
+        if(event.key === "Enter" || event.type === "click"){
+            event.preventDefault()
+            const keyword = searchRef.current.value
+            router.push(`/search/${keyword}`)
+        }
     }
-    const enterHandleSearch = (e) => {
-       if(e.keyCode = 13 ){
-           const keyword = searchRef.current.value
-           router.push(`/search/${keyword}`)
-       }
-    }
+
     return(
         <div className="relative">
-            <input  placeholder="Golek O" className="w-full p-2 rounded" ref={searchRef} onKeyDown={enterHandleSearch}/>
+            <input  placeholder="Golek O" className="w-full p-2 rounded" ref={searchRef} onKeyDown={handleSearch}/>
             <button className="absolute top-2 end-1" onClick={handleSearch} >
                 <MagnifyingGlass size={24} />
             </button>
